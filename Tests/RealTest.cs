@@ -17,7 +17,6 @@ namespace Sitecore.Fakes.Tests
             var stubList = new FieldList {{fieldId, fieldValue}};
             var fakeItem = new FakeItem(stubList);
 
-          
             var item = fakeItem;
             
             demo.GetField(item).ShouldAllBeEquivalentTo(fieldValue);
