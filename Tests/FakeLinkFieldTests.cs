@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Sitecore.Collections;
-using Sitecore.Configuration;
+﻿using FluentAssertions;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
-using Sitecore.Data.Items;
 using Sitecore.Fakes.Fields;
-using Sitecore.Resources.Media;
 using Xunit;
 
 namespace Sitecore.Fakes.Tests
@@ -19,18 +10,18 @@ namespace Sitecore.Fakes.Tests
     {
 
         [Fact]
-        public void Field_AddingLinkFieldWithLinkFromOneItemToAnother_TargetItemShouldReturnLinkedToItem()
+        public void FieldAddingLinkFieldWithLinkFromOneItemToAnotherTargetItemShouldReturnLinkedToItem()
         {
-            Item linkedToItem = new FakeItem();
-            FakeInternalLinkField fakeLinkField = new FakeInternalLinkField(linkedToItem);
+            var linkedToItem = new FakeItem();
+            var fakeLinkField = new FakeInternalLinkField(linkedToItem);
            
-            ID fieldId = ID.NewID;
-            FieldList fieldCollection = new FieldList();
+            var fieldId = ID.NewID;
+            var fieldCollection = new FieldList();
             fieldCollection.Add(fieldId,fakeLinkField.ToString());
 
-            Item itemToLinkFrom = new FakeItem(fieldCollection);
+            var itemToLinkFrom = new FakeItem(fieldCollection);
 
-            LinkField sitecoreLinkField = (LinkField) itemToLinkFrom.Fields[fieldId];
+            var sitecoreLinkField = (LinkField) itemToLinkFrom.Fields[fieldId];
          
             sitecoreLinkField.TargetItem.ID.ShouldBeEquivalentTo(linkedToItem.ID);
         }

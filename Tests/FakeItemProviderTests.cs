@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using FluentAssertions;
-using Ploeh.AutoFixture.Xunit;
-using Sitecore.Collections;
 using Sitecore.Data;
-using Sitecore.Data.Items;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Sitecore.Fakes.Tests
 {
@@ -17,10 +9,10 @@ namespace Sitecore.Fakes.Tests
     {
 
         [Fact]
-        public void FakeItem_AddMultipleChildren_ChildListShouldHaveAllChildren()
+        public void FakeItemAddMultipleChildrenChildListShouldHaveAllChildren()
         {
-            Item child = new FakeItem(new FieldList());
-            FakeItem fake = new FakeItem(new FieldList());
+            var child = new FakeItem(new FieldList());
+            var fake = new FakeItem(new FieldList());
             fake.AddChild(child);
             fake.AddChild(child);
             fake.AddChild(child);
@@ -31,20 +23,20 @@ namespace Sitecore.Fakes.Tests
         }
 
         [Fact]
-        public void FakeItem_AddChildToChildren_ShouldReturnChild()
+        public void FakeItemAddChildToChildrenShouldReturnChild()
         {
-            Item child = new FakeItem(new FieldList());
-            FakeItem fake = new FakeItem(new FieldList());
+            var child = new FakeItem(new FieldList());
+            var fake = new FakeItem(new FieldList());
             fake.AddChild(child);
 
             fake.Children.First().ShouldBeEquivalentTo(child);
         }
 
         [Fact]
-        public void FakeItem_AddChildToChildren_ChildShouldHaveParent()
+        public void FakeItemAddChildToChildrenChildShouldHaveParent()
         {
-            Item child = new FakeItem(new FieldList());
-            FakeItem fake = new FakeItem(new FieldList());
+            var child = new FakeItem(new FieldList());
+            var fake = new FakeItem(new FieldList());
             fake.AddChild(child);
 
             fake.Children.First().Parent.ShouldBeEquivalentTo(fake);
@@ -52,10 +44,10 @@ namespace Sitecore.Fakes.Tests
         }
 
         [Fact]
-        public void FakeItem_AddChildToChildren_ChildShouldHaveParentWithId()
+        public void FakeItemAddChildToChildrenChildShouldHaveParentWithId()
         {
-            Item child = new FakeItem(new FieldList());
-            FakeItem fake = new FakeItem(new FieldList());
+            var child = new FakeItem(new FieldList());
+            var fake = new FakeItem(new FieldList());
             fake.AddChild(child);
 
             fake.Children.First().ParentID.ShouldBeEquivalentTo(fake.ID);

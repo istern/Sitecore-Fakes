@@ -23,9 +23,7 @@ namespace Sitecore.Fakes
        public override Item GetItem(ID itemId, Language language, Version version, Database database, SecurityCheck securityCheck)
        {
            FakeDatabase fakeDatabase = database as FakeDatabase;
-           if (fakeDatabase == null)
-               return ((FakeDatabase) Factory.GetDatabase(database.Name)).FakeGetItem(itemId);
-           return ((FakeDatabase) database).FakeGetItem(itemId);
+           return fakeDatabase == null ? ((FakeDatabase) Factory.GetDatabase(database.Name)).FakeGetItem(itemId) : ((FakeDatabase) database).FakeGetItem(itemId);
        }
 
       

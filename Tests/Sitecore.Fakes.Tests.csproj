@@ -79,7 +79,6 @@
     <Compile Include="FakeItemTests.cs" />
     <Compile Include="FakeLinkFieldTests.cs" />
     <Compile Include="FakeMediaProviderTests.cs" />
-    <Compile Include="NunitTestsFakeItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTest.cs" />
   </ItemGroup>

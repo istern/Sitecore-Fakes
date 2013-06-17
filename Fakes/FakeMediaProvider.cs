@@ -13,7 +13,7 @@ namespace Sitecore.Fakes
     {
         public override string GetMediaUrl(MediaItem item)
         {
-            Item sourceItem =  item;
+            var sourceItem = (Item) item;
             return String.Format("/~/media/{0}.{1}", sourceItem.Name, sourceItem[MediaStandardFields.ExtensionId]);
         }
     }

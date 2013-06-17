@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Xunit;
@@ -15,16 +10,15 @@ namespace Sitecore.Fakes.Tests
         [Fact]
         public void ItemTest()
         {   
-            Demo demo =  new Demo();
+            var demo =  new Demo();
 
-            ID fieldId = demo.FieldName;
-            string fieldValue = "demoText";
-            FieldList stubList = new FieldList();
-            stubList.Add(fieldId,fieldValue);
-            FakeItem fakeItem = new FakeItem(stubList);
+            var fieldId = demo.FieldName;
+            const string fieldValue = "demoText";
+            var stubList = new FieldList {{fieldId, fieldValue}};
+            var fakeItem = new FakeItem(stubList);
 
           
-            Item item = fakeItem;
+            var item = fakeItem;
             
             demo.GetField(item).ShouldAllBeEquivalentTo(fieldValue);
         }

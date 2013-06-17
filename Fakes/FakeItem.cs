@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 using Sitecore.Collections;
 using Sitecore.Data;
-using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
-using Sitecore.Data.Managers;
-using Sitecore.Data.Templates;
 
 
 namespace Sitecore.Fakes
@@ -47,8 +40,6 @@ namespace Sitecore.Fakes
                 new Database(databaseName))
         {
             FakeChildren = new ItemList();
-
-
         }
 
         
@@ -58,8 +49,8 @@ namespace Sitecore.Fakes
             FakeChildren.Add(child);
         }
 
-        public virtual Item FakeParent { get; set; }
-        public virtual ItemList FakeChildren { get; set; }
+        public Item FakeParent { get; set; }
+        public ItemList FakeChildren { get; set; }
     }
 
 
