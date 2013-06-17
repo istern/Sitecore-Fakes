@@ -8,8 +8,10 @@ namespace Sitecore.Fakes
     public class FakeDatabase : Database
     {
         private readonly ConcurrentBag<Item> _items;
+       
 
-        public FakeDatabase(string name) : base(name)
+        public FakeDatabase(string name)
+            : base(name)
         {
             _items = new ConcurrentBag<Item>();
         }
@@ -23,5 +25,7 @@ namespace Sitecore.Fakes
         {
             return _items.FirstOrDefault(i => i.ID == itemid);
         }
+
+        public Item RootItem { get; set; }
     }
 }

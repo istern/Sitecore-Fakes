@@ -1,7 +1,9 @@
 ﻿using System;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit;
+using Sitecore.Configuration;
 using Sitecore.Data;
+using Sitecore.Data.Items;
 using Xunit;
 using Xunit.Extensions;
 
@@ -56,6 +58,7 @@ namespace Sitecore.Fakes.Tests
             fake.Fields.Should().HaveCount(2);
         }
 
+       
 
         [Theory, AutoData]
         public void FakeItemGetFieldFromIdShoudlReturnFieldValue(string fieldValue, FieldList fieldList)
@@ -66,6 +69,19 @@ namespace Sitecore.Fakes.Tests
             var fake = new FakeItem(fieldList);
 
             fake[fieldId].ShouldAllBeEquivalentTo(fieldValue);
+        }
+
+
+        [Theory, AutoData]
+        public void FakeItemPathShouldContainFullPathParentNameChildName()
+        {
+                
+            FakeItem parent = new FakeItem();
+            ((FakeDatabase)Factory.GetDatabase("web")).RootItem = parent;
+            FakeItem child = new FakeItem();
+            parent.AddChild(child);
+            var sut = (Item)child;
+            sut.Paths.FullPath.ShouldAllBeEquivalentTo("/"+parent.Name+"/"+child.Name);
         }
        
 

@@ -12,26 +12,31 @@ namespace Sitecore.Fakes
         public const string DefaultDatabaseName = "web";
 
 
-        public FakeItem(string itemName = DefaultitemName)
-            : this(new FieldList(), itemName)
+        public FakeItem()
+            : this(ID.NewID)
         {
+        }
 
+        public FakeItem(string itemName = DefaultitemName)
+            : this(ID.NewID,itemName)
+        {
         }
 
 
-        public FakeItem(ID itemId, string itemName = DefaultitemName)
+        public FakeItem(ID itemId,string itemName=DefaultitemName)
             : this(new FieldList(), itemId,itemName)
         {
-
         }
-
+        public FakeItem(FieldList fieldList, ID itemId)
+            : this(fieldList, itemId,DefaultitemName,DefaultDatabaseName )
+        {
+        }
 
         public FakeItem(FieldList fieldList, string itemName = DefaultitemName)
             : this(fieldList, ID.NewID, itemName)
         {
-
         }
-
+        
         public FakeItem(FieldList fieldList, ID itemid, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName)
             : base(
                itemid,
@@ -52,8 +57,4 @@ namespace Sitecore.Fakes
         public Item FakeParent { get; set; }
         public ItemList FakeChildren { get; set; }
     }
-
-
-
-
 }

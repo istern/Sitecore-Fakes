@@ -22,10 +22,14 @@ namespace Sitecore.Fakes
 
        public override Item GetItem(ID itemId, Language language, Version version, Database database, SecurityCheck securityCheck)
        {
-           FakeDatabase fakeDatabase = database as FakeDatabase;
+           var fakeDatabase = database as FakeDatabase;
            return fakeDatabase == null ? ((FakeDatabase) Factory.GetDatabase(database.Name)).FakeGetItem(itemId) : ((FakeDatabase) database).FakeGetItem(itemId);
        }
 
-      
+       public override Item GetRootItem(Language language, Version version, Database database, SecurityCheck securityCheck)
+       {
+           var fakeDatabase = database as FakeDatabase;
+           return fakeDatabase == null ? ((FakeDatabase)Factory.GetDatabase(database.Name)).RootItem : fakeDatabase.RootItem;
+       }
     }
 }
