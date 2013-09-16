@@ -33,9 +33,6 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.2.0.1\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
-    <Reference Include="NativeAssemblerInjection">
-      <HintPath>..\..\MinorTest\ClassLibrary1\ClassLibrary1\bin\Debug\NativeAssemblerInjection.dll</HintPath>
-    </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\packages\NSubstitute.1.4.3.0\lib\NET40\NSubstitute.dll</HintPath>
     </Reference>
@@ -52,11 +49,10 @@
       <HintPath>..\packages\AutoFixture.Xunit.3.2.1\lib\net40\Ploeh.AutoFixture.Xunit.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\RandomTests\bin\Debug\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\lib\Sitecore\Sitecore.Kernel.dll</HintPath>
     </Reference>
-    <Reference Include="sitecore.nexus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Sitecore-MVC\www\bin\sitecore.nexus.dll</HintPath>
+    <Reference Include="sitecore.nexus">
+      <HintPath>..\lib\Sitecore\sitecore.nexus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
