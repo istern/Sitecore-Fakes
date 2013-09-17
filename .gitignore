@@ -5,6 +5,9 @@
 # mstest test results
 TestResults
 
+# Fakes
+build/Sitecore.Fakes.*.nupkg
+
 # Sitecore
 lib/Sitecore/*.*
 
