@@ -1,9 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Fakes", "Fakes\Sitecore.Fakes.csproj", "{0F71EFF9-9E35-4961-8492-E2CEC5769C67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Fakes.Tests", "Tests\Sitecore.Fakes.Tests.csproj", "{E5273E6E-8E39-4188-BA6C-B0507738D52D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6F63888A-918B-4DD6-ACDC-48A225554651}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{16A1E369-946E-440F-A3E7-29A1144E3742}"
+	ProjectSection(SolutionItems) = preProject
+		build\App.config.transform = build\App.config.transform
+		build\build.cmd = build\build.cmd
+		build\readme.txt = build\readme.txt
+		build\Sitecore.Fakes.nuspec = build\Sitecore.Fakes.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

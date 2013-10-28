@@ -1,16 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <configSections>
     <section name="sitecore" type="Sitecore.Configuration.ConfigReader, Sitecore.Kernel" />
     <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, Sitecore.Logging" />
   </configSections>
-  <sitecore database="SqlServer">
-    <itemManager defaultProvider="default">
-      <providers>
-        <clear />
-        <add name="default" type="Sitecore.Fakes.FakeItemProvider, Sitecore.Fakes" />
-      </providers>
-    </itemManager>
+  <sitecore>
     <databases>
       <database id="web" singleInstance="true" type="Sitecore.Fakes.FakeDatabase, Sitecore.Fakes">
         <param desc="name">$(id)</param>
@@ -19,15 +13,6 @@
     <mediaLibrary>
       <mediaProvider type="Sitecore.Fakes.FakeMediaProvider, Sitecore.Fakes" />
     </mediaLibrary>
-    <standardValues defaultProvider="sitecore">
-      <providers>
-        <clear />
-        <add name="sitecore" type="Sitecore.Data.StandardValuesProvider, Sitecore.Kernel" />
-      </providers>
-    </standardValues>
-    <settings>
-      <setting name="LicenseFile" value="D:\license.xml" />
-    </settings>
   </sitecore>
   <log4net />
 </configuration>
