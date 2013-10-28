@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Sitecore.Fakes</id>
+    <version>1.0.0</version>
+    <title>Sitecore Fakes</title>
+    <authors>Thomas Stern, Per Manniche Bering</authors>
+    <owners>Thomas Stern</owners>
+    <projectUrl>https://github.com/istern/Sitecore-Fakes</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A Isolation Framework for Sitecore.</description>
+    <releaseNotes>First release on Nuget</releaseNotes>
+    <tags>Sitecore, Testing</tags>
+  </metadata>
+  <files>
+    <file src="readme.txt" target="readme.txt" />
+    <file src="App.config.transform" target="content" />
+    <file src="..\Fakes\bin\Release\Sitecore.Fakes.dll" target="lib\net40" />
+  </files>
+</package>
