@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Sitecore.Configuration;
 using Sitecore.Data;
+using Sitecore.Data.Templates;
 using Xunit;
 
 namespace Sitecore.Fakes.Tests

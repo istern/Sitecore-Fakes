@@ -26,6 +26,12 @@ namespace Sitecore.Fakes
             return _items.FirstOrDefault(i => i.ID == itemid);
         }
 
+       
+ 
+
+ 
+
+
         public Item RootItem { get; set; }
     }
 }

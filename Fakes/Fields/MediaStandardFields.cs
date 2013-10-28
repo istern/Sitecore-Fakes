@@ -25,8 +25,6 @@ namespace Sitecore.Fakes.Fields
         public static string Mimetype = "Mime type";
         public static string Size = "size";
        
-        public MediaStandardFields()
-        {
-        }
+      
     }
 }

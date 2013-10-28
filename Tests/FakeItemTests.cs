@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Reflection;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit;
 using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Data.Managers;
 using Xunit;
 using Xunit.Extensions;
 
@@ -89,18 +91,27 @@ namespace Sitecore.Fakes.Tests
         public void FakeItemUpdateTemplateIdShouldReturnTemplateId()
         {
             ID tempalteId = ID.NewID;
-            
-           
             var parent = new FakeItem(ID.NewID, tempalteId);
-            
+      
             var sut = (Item)parent;
             
             sut.TemplateID.ShouldBeEquivalentTo(tempalteId);
         }
-       
 
-       
 
+
+        [Fact]
+        public void FakesAssignFakeChildrenWithAdd()
+        {
+            var child = new FakeItem(new ID("{11111111-1111-1111-1111-111111111115}"), "testSub1");
+
+            var parent = new FakeItem(new ID("{030C5633-85B5-492E-BDF1-E24789A3B49B}"), "MyTest");
+            parent.FakeChildren.Add(child);
+       
+            parent.Children.Count.Should().Be(1);
+            parent.Children[0].Should().Be(child);
+
+        }
 
   
     }
