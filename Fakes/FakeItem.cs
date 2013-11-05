@@ -22,6 +22,17 @@ namespace Sitecore.Fakes
         {
         }
 
+        public FakeItem(string databaseName, string itemName = DefaultitemName)
+            : this(new FieldList(), ID.NewID, itemName, databaseName)
+        {
+        }
+
+        public FakeItem(ID itemId, ID templateID, string itemName, string dabaseName = DefaultDatabaseName)
+            : this(new FieldList(), itemId, templateID, itemName, dabaseName)
+        {
+           
+        }
+
         public FakeItem(ID itemId, ID templateID, string itemName = DefaultitemName)
             : this(new FieldList(), itemId, templateID, itemName)
         {

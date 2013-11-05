@@ -31,5 +31,15 @@ namespace Sitecore.Fakes
            var fakeDatabase = database as FakeDatabase;
            return fakeDatabase == null ? ((FakeDatabase)Factory.GetDatabase(database.Name)).RootItem : fakeDatabase.RootItem;
        }
+
+       public override Item AddFromTemplate(string itemName, ID templateId, Item destination, ID newId)
+       {
+           FakeDatabase fakeDatabase = Factory.GetDatabase(destination.Database.Name) as FakeDatabase;
+           FakeItem child = new FakeItem(newId, templateId, itemName, fakeDatabase.Name);
+           FakeItem fakeParent = destination as FakeItem;
+           fakeParent.AddChild(child);
+           fakeDatabase.FakeAddItem(child);
+           return child;
+       }
     }
 }

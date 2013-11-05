@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationFakes\FakeAccessRight.cs" />
+    <Compile Include="ConfigurationFakes\FakeAutheorizationProvider.cs" />
+    <Compile Include="ConfigurationFakes\FakeDomainProvider.cs" />
     <Compile Include="FakeDatabase.cs" />
     <Compile Include="FakeTemplateProvider.cs" />
     <Compile Include="Fields\FakeField.cs" />
