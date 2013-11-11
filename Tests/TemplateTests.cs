@@ -47,7 +47,6 @@ namespace Sitecore.Fakes.Tests
         {
 
             Database masteDatabase = Factory.GetDatabase("master");
-
             ID parentTemplateId = ID.NewID;
 
             ID baseTemplateId = ID.NewID;
@@ -72,10 +71,9 @@ namespace Sitecore.Fakes.Tests
             templateProvider.AddTemplate(bItemitem2, baseIds);
             templateProvider.AddTemplate(bItemitem3, baseIds);
 
-
-            TemplateItem[] t = masteDatabase.Templates.GetTemplates(Language.Parse("en"));
+            TemplateItem[] t = masteDatabase.Templates.GetTemplates(Language.Current);
             TemplateItem templateItem = masteDatabase.GetTemplate("newTemplate");
-            templateItem.BaseTemplates.Should().HaveCount(3);
+           templateItem.BaseTemplates.Should().HaveCount(3);
         }
 
         [Fact]
@@ -83,9 +81,7 @@ namespace Sitecore.Fakes.Tests
         {
 
             Database masteDatabase = Factory.GetDatabase("master");
-
             ID parentTemplateId = ID.NewID;
-
             ID baseTemplateId = ID.NewID;
             ID baseTemplateId2 = ID.NewID;
             ID baseTemplateId3 = ID.NewID;
@@ -94,25 +90,25 @@ namespace Sitecore.Fakes.Tests
             FakeItem bItemitem2 = new FakeItem("master", baseTemplateId2, "b2");
             FakeItem bItemitem3 = new FakeItem("master", baseTemplateId3, "b3");
 
-            FakeItem item = new FakeItem("master", parentTemplateId, "newTemplate");
+            FakeItem templateItem = new FakeItem("master", parentTemplateId, "newTemplate");
             FakeItem parent = new FakeItem("master", TemplateIDs.Template, "parent");
 
             ((FakeDatabase)masteDatabase).FakeAddItem(parent);
             ID fakeContentId = ID.NewID;
-            FakeItem contentItemtem = new FakeItem(fakeContentId, item.ID, "content", "master");
+            FakeItem contentItemtem = new FakeItem(fakeContentId, templateItem.ID, "content", "master");
             ((FakeDatabase)masteDatabase).FakeAddItem(contentItemtem);
 
             ((FakeDatabase)masteDatabase).RootItem = parent;
 
             FakeTemplateProvider templateProvider = new FakeTemplateProvider();
-            templateProvider.AddTemplate(item, baseIds);
+            templateProvider.AddTemplate(templateItem, baseIds);
             templateProvider.AddTemplate(bItemitem1, baseIds);
             templateProvider.AddTemplate(bItemitem2, baseIds);
             templateProvider.AddTemplate(bItemitem3, baseIds);
-
-            Item i = masteDatabase.GetItem(fakeContentId);
-
-            i.Template.BaseTemplates.Should().HaveCount(3);
+            Item fetchedItem = masteDatabase.GetItem(fakeContentId);
+            var q = masteDatabase.Templates;
+            var h = q[templateItem.ID];
+           fetchedItem.Template.BaseTemplates.Should().HaveCount(3);
         }
     }
 }
