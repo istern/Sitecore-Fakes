@@ -14,47 +14,19 @@ namespace Sitecore.Fakes
 {
     public class FakeTemplateProvider : DataProvider
     {
-        private static TemplateCollection _templates;
-
-        public TemplateCollection Templates
-        {
-            get
-            {
-                if (_templates == null)
-                    _templates = new TemplateCollection();
-                return _templates;
-            }
-        }
-
-        public IdCollection IdCollection
-        {
-            get
-            {
-                if (_ids == null)
-                    _ids = new IdCollection();
-                return _ids;
-            }
-        }
-
-        private static IdCollection _ids;
         private const string DefaultTemplateId = "{ab86861a-6030-46c5-b394-e8f99e8b87db}";
         private const string DefaultTemplateName = "Template";
 
         public FakeTemplateProvider()
         {
-            
             Template.Builder builder = new Template.Builder(DefaultTemplateName, ID.Parse(DefaultTemplateId), new TemplateCollection());
-            Templates.Add(builder.Template);
-            IdCollection.Add(ID.Parse(DefaultTemplateId));
-
+            AddTemplate(builder.Template);
         }
 
         public void AddTemplate(FakeItem item)
         {
             Template.Builder builder = new Template.Builder(item.Name, item.ID, new TemplateCollection());
-            Templates.Add(builder.Template);
-            IdCollection.Add(item.ID);
-
+            AddTemplate(builder.Template);
         }
 
         public void AddTemplate(FakeItem item, IEnumerable<ID> baseTeamplatesIds)
@@ -68,10 +40,17 @@ namespace Sitecore.Fakes
             }
             string idsString = strnBuilder.ToString().TrimEnd('|');
             builder.SetBaseIDs(idsString);
-           Templates.Add(builder.Template);
-           IdCollection.Add(item.ID);
+            AddTemplate(builder.Template);
         }
 
+        private void AddTemplate(Template template)
+        {
+            if(!Templates.Contains(template.ID))
+            {
+                Templates.Add(template);
+                IdCollection.Add(ID.Parse(DefaultTemplateId));
+            }
+        }
 
 
         public override IdCollection GetTemplateItemIds(CallContext context)
@@ -82,6 +61,17 @@ namespace Sitecore.Fakes
         public override TemplateCollection GetTemplates(CallContext context)
         {
             return Templates;
+        }
+
+        private static TemplateCollection _templates;
+        public TemplateCollection Templates
+        {
+            get { return _templates ?? (_templates = new TemplateCollection()); }
+        }
+        private static IdCollection _ids;
+        public IdCollection IdCollection
+        {
+            get { return _ids ?? (_ids = new IdCollection()); }
         }
     }
 }

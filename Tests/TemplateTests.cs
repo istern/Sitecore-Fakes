@@ -45,7 +45,6 @@ namespace Sitecore.Fakes.Tests
         [Fact]
         public void CreateTemplateWithBaseTemplates()
         {
-
             Database masteDatabase = Factory.GetDatabase("master");
             ID parentTemplateId = ID.NewID;
 
@@ -63,15 +62,13 @@ namespace Sitecore.Fakes.Tests
             FakeItem parent = new FakeItem("master", TemplateIDs.Template, "parent");
 
             ((FakeDatabase)masteDatabase).FakeAddItem(parent);
-
-
+            
             FakeTemplateProvider templateProvider = new FakeTemplateProvider();
             templateProvider.AddTemplate(item, baseIds);
             templateProvider.AddTemplate(bItemitem1, baseIds);
             templateProvider.AddTemplate(bItemitem2, baseIds);
             templateProvider.AddTemplate(bItemitem3, baseIds);
 
-            TemplateItem[] t = masteDatabase.Templates.GetTemplates(Language.Current);
             TemplateItem templateItem = masteDatabase.GetTemplate("newTemplate");
            templateItem.BaseTemplates.Should().HaveCount(3);
         }
@@ -106,9 +103,9 @@ namespace Sitecore.Fakes.Tests
             templateProvider.AddTemplate(bItemitem2, baseIds);
             templateProvider.AddTemplate(bItemitem3, baseIds);
             Item fetchedItem = masteDatabase.GetItem(fakeContentId);
-            var q = masteDatabase.Templates;
-            var h = q[templateItem.ID];
+           
+
            fetchedItem.Template.BaseTemplates.Should().HaveCount(3);
-        }
+         }
     }
 }
