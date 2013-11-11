@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using NUnit.Framework;
 using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -15,70 +16,68 @@ namespace Sitecore.Fakes.Tests
 {
    public class TemplateTests
     {
-        [Fact]
+        [Theory]
         public void CreateTemplate()
         {
-
             Database masteDatabase = Factory.GetDatabase("master");
 
-            ID parentTemplateId = ID.NewID;
+            ID templateId = ID.NewID;
 
-            FakeItem item = new FakeItem("master", parentTemplateId, "newTemplate");
-            FakeItem parent = new FakeItem("master", TemplateIDs.Template, "parent");
+            FakeItem item = new FakeItem("master", templateId, "newTemplate");
+          
 
-            ((FakeDatabase)masteDatabase).FakeAddItem(parent);
-
-
-            FakeTemplateProvider templateProvider = new FakeTemplateProvider();
-            templateProvider.AddTemplate(item);
-
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(item, new List<Item>());
 
             TemplateItem[] t = masteDatabase.Templates.GetTemplates(Language.Current);
 
-            t.Should().NotBeNull();
-
-
-
+            t.Should().HaveCount(1);
+            
         }
 
 
-        [Fact]
-        public void CreateTemplateWithBaseTemplates()
+        [Theory]
+        public void CreateTemplateWithBaseTemplates_TemplateItem_ShouldhaveAllBaseTemplates()
         {
-            Database masteDatabase = Factory.GetDatabase("master");
+           Database masteDatabase = Factory.GetDatabase("master");
+
             ID parentTemplateId = ID.NewID;
 
-            ID baseTemplateId = ID.NewID;
-            ID baseTemplateId2 = ID.NewID;
-            ID baseTemplateId3 = ID.NewID;
-            List<ID> baseIds = new List<ID>() { baseTemplateId, baseTemplateId2, baseTemplateId3 };
+             ID baseTemplateId = ID.NewID;
+             ID baseTemplateId2 = ID.NewID;
+             ID baseTemplateId3 = ID.NewID;
+            List<ID>baseIds = new List<ID>(){baseTemplateId,baseTemplateId2,baseTemplateId3};
 
             FakeItem bItemitem1 = new FakeItem("master", baseTemplateId, "b1");
             FakeItem bItemitem2 = new FakeItem("master", baseTemplateId2, "b2");
             FakeItem bItemitem3 = new FakeItem("master", baseTemplateId3, "b3");
-
+            List<Item>baseTemplates = new List<Item>();
+            baseTemplates.Add(bItemitem1);
+            baseTemplates.Add(bItemitem2);
+            baseTemplates.Add(bItemitem3);
 
             FakeItem item = new FakeItem("master", parentTemplateId, "newTemplate");
-            FakeItem parent = new FakeItem("master", TemplateIDs.Template, "parent");
 
-            ((FakeDatabase)masteDatabase).FakeAddItem(parent);
-            
-            FakeTemplateProvider templateProvider = new FakeTemplateProvider();
-            templateProvider.AddTemplate(item, baseIds);
-            templateProvider.AddTemplate(bItemitem1, baseIds);
-            templateProvider.AddTemplate(bItemitem2, baseIds);
-            templateProvider.AddTemplate(bItemitem3, baseIds);
 
-            TemplateItem templateItem = masteDatabase.GetTemplate("newTemplate");
-           templateItem.BaseTemplates.Should().HaveCount(3);
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(bItemitem1, new List<Item>());
+
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(bItemitem2, new List<Item>());
+
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(bItemitem3, new List<Item>());
+
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(item,baseTemplates);
+
+            TemplateItem[] t = masteDatabase.Templates.GetTemplates(Language.Parse("en"));
+            TemplateItem templateItem =  masteDatabase.GetTemplate("newTemplate");
+            templateItem.BaseTemplates.Should().HaveCount(3);
         }
 
-        [Fact]
-        public void CreateTemplateAndItem_ItemShouldHaveAllBaseTemplates()
+        [Theory]
+        public void CreateItemFromTemplate_ItemTemplateShouldHaveAllBaseTemplates()
         {
-
             Database masteDatabase = Factory.GetDatabase("master");
+
             ID parentTemplateId = ID.NewID;
+
             ID baseTemplateId = ID.NewID;
             ID baseTemplateId2 = ID.NewID;
             ID baseTemplateId3 = ID.NewID;
@@ -86,26 +85,32 @@ namespace Sitecore.Fakes.Tests
             FakeItem bItemitem1 = new FakeItem("master", baseTemplateId, "b1");
             FakeItem bItemitem2 = new FakeItem("master", baseTemplateId2, "b2");
             FakeItem bItemitem3 = new FakeItem("master", baseTemplateId3, "b3");
+            List<Item> baseTemplates = new List<Item>();
+            baseTemplates.Add(bItemitem1);
+            baseTemplates.Add(bItemitem2);
+            baseTemplates.Add(bItemitem3);
 
-            FakeItem templateItem = new FakeItem("master", parentTemplateId, "newTemplate");
-            FakeItem parent = new FakeItem("master", TemplateIDs.Template, "parent");
+            FakeItem item = new FakeItem("master", parentTemplateId, "newTemplate");
 
-            ((FakeDatabase)masteDatabase).FakeAddItem(parent);
+
+
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(bItemitem1, new List<Item>());
+
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(bItemitem2, new List<Item>());
+
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(bItemitem3, new List<Item>());
+
+            ((FakeDatabase)masteDatabase).FakeAddTemplate(item, baseTemplates);
+
+
+
             ID fakeContentId = ID.NewID;
-            FakeItem contentItemtem = new FakeItem(fakeContentId, templateItem.ID, "content", "master");
+            FakeItem contentItemtem = new FakeItem(fakeContentId, item.ID, "content", "master");
             ((FakeDatabase)masteDatabase).FakeAddItem(contentItemtem);
 
-            ((FakeDatabase)masteDatabase).RootItem = parent;
+            Item i = masteDatabase.GetItem(fakeContentId);
 
-            FakeTemplateProvider templateProvider = new FakeTemplateProvider();
-            templateProvider.AddTemplate(templateItem, baseIds);
-            templateProvider.AddTemplate(bItemitem1, baseIds);
-            templateProvider.AddTemplate(bItemitem2, baseIds);
-            templateProvider.AddTemplate(bItemitem3, baseIds);
-            Item fetchedItem = masteDatabase.GetItem(fakeContentId);
-           
-
-           fetchedItem.Template.BaseTemplates.Should().HaveCount(3);
-         }
+            i.Template.BaseTemplates.Should().HaveCount(3);
+        }
     }
 }
