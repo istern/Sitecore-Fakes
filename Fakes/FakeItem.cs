@@ -1,5 +1,6 @@
 ﻿using System;
 using Sitecore.Collections;
+using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 
@@ -27,6 +28,13 @@ namespace Sitecore.Fakes
         {
         }
 
+        public FakeItem(string databaseName, ID itemId, string itemName = DefaultitemName)
+            : this(new FieldList(), itemId, ID.NewID, itemName, databaseName)
+        {
+        }
+
+      
+
         public FakeItem(ID itemId, ID templateID, string itemName, string dabaseName = DefaultDatabaseName)
             : this(new FieldList(), itemId, templateID, itemName, dabaseName)
         {
@@ -53,7 +61,7 @@ namespace Sitecore.Fakes
                itemid,
                 new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
                              Globalization.Language.Invariant, new Data.Version(1), fieldList),
-                new Database(databaseName))
+                Factory.GetDatabase(databaseName))
         {
             FakeChildren = new ItemList();
          

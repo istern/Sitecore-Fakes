@@ -37,19 +37,17 @@ namespace Sitecore.Fakes.Tests
         [Fact]
         public void CreateAndEditItemTest()
         {
-            //setup database so we have a rood node to add our content to
-           
+            //setup database so we have a rood node to add our content to           
             var homeFakeItem = new FakeItem();
             Item homeItem = (Item) homeFakeItem;
             
-            
-
             //Define some Field IDs
             TemplateID templateId = new TemplateID(ID.NewID);
             Item subNode;
             ID fieldIdA = ID.NewID;
             ID fieldIdB = ID.NewID;
 
+            //add and edit the ite,
             using (new SecurityDisabler())
             {
                 subNode = homeItem.Add("SubNode", templateId);
