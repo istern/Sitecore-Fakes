@@ -61,7 +61,7 @@ namespace Sitecore.Fakes
                itemid,
                 new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
                              Globalization.Language.Invariant, new Data.Version(1), fieldList),
-                Factory.GetDatabase(databaseName))
+                new FakeDatabase(databaseName))
         {
             FakeChildren = new ItemList();
          

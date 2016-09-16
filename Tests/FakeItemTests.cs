@@ -74,17 +74,7 @@ namespace Sitecore.Fakes.Tests
         }
 
 
-        [Theory, AutoData]
-        public void FakeItemPathShouldContainFullPathParentNameChildName(string parentName, string childName)
-        {
-               
-            var parent = new FakeItem(parentName);
-            ((FakeDatabase)Factory.GetDatabase("web")).RootItem = parent;
-            var child = new FakeItem(childName);
-            parent.AddChild(child);
-            var sut = (Item)child;
-            sut.Paths.FullPath.ShouldAllBeEquivalentTo("/"+parent.Name+"/"+child.Name);
-        }
+      
 
 
         [Theory, AutoData]
