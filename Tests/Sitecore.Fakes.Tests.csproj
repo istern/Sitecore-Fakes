@@ -120,9 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FakeItemProviderTests.cs" />
     <Compile Include="FakeItemTests.cs" />
-    <Compile Include="FakeMediaProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTest.cs" />
   </ItemGroup>
