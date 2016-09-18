@@ -90,19 +90,7 @@ namespace Sitecore.Fakes.Tests
 
 
 
-        [Fact]
-        public void FakesAssignFakeChildrenWithAdd()
-        {
-            var child = new FakeItem(new ID("{11111111-1111-1111-1111-111111111115}"), "testSub1");
-
-            var parent = new FakeItem(new ID("{030C5633-85B5-492E-BDF1-E24789A3B49B}"), "MyTest");
-            parent.FakeChildren.Add(child);
-       
-            parent.Children.Count.Should().Be(1);
-            parent.Children[0].Should().Be(child);
-
-        }
-
+        
   
     }
 }
