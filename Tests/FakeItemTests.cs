@@ -160,7 +160,7 @@ namespace Sitecore.Fakes.Tests
             var child = parent.Add(childName, templateID);
 
             
-           var str = child.Paths.FullPath;
+        //   var str = child.Paths.FullPath;
         }
 
 

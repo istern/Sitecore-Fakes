@@ -90,6 +90,7 @@
     <Compile Include="ConfigurationFakes\FakeAutheorizationProvider.cs" />
     <Compile Include="ConfigurationFakes\FakeDomainProvider.cs" />
     <Compile Include="FakeDatabase.cs" />
+    <Compile Include="FakeItemProvider.cs" />
     <Compile Include="FakeTemplateProvider.cs" />
     <Compile Include="Fields\FakeField.cs" />
     <Compile Include="FakeItem.cs" />
