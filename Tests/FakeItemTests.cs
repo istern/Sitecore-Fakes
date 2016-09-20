@@ -38,6 +38,29 @@ namespace Sitecore.Fakes.Tests
         }
 
         [Theory, AutoData]
+        public void DefaultConstructorTest(string databaseName,string itemName)
+        {
+            var fake = new FakeItem(databaseName,itemName);
+            fake.Name.Should().Be(itemName);
+        }
+
+        [Theory, AutoData]
+        public void DefaultConstructorTestWithParameter(string databaseName, ID itemId, string itemName)
+        {
+           
+            var fake = new FakeItem(databaseName,itemId, itemName);
+            fake.Name.Should().Be(itemName);
+        }
+
+        [Theory, AutoData]
+        public void DefaultConstructorTestWithoutFieldListParameter(ID itemId, ID templateID, string itemName, string databaseName)
+        {
+            
+            var fake = new FakeItem(itemId,templateID, itemName, databaseName);
+            fake.Name.Should().Be(itemName);
+        }
+
+        [Theory, AutoData]
         public void FakeItemAddFieldShouldReturnField(FieldList fieldList,string fieldValue)
         {
             var fieldId = ID.NewID;

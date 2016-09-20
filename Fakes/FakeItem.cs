@@ -62,24 +62,9 @@ namespace Sitecore.Fakes
                 new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
                              Globalization.Language.Invariant, new Data.Version(1), fieldList),
                 new FakeDatabase(databaseName))
-        {
-            FakeChildren = new ItemList();
+        {         
          
         }
-
-
-        
-
-        public virtual void AddChild(Item child)
-        {
-            ((FakeItem)child).FakeParent = this;
-            FakeChildren.Add(child);
-        }
-
-        public Item FakeParent { get; set; }
-
-        public ItemList FakeChildren { get; set; }
-
 
     }
 }
