@@ -63,7 +63,7 @@ namespace Sitecore.Fakes
             get
             {
                 if(_rootItem == null)
-                    return new FakeItem();
+                    return new FakeItem("sitecore");
                 return _rootItem;
             } 
             set { _rootItem = value; } }
