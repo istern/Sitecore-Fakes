@@ -3,6 +3,7 @@ using Sitecore.Collections;
 using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Globalization;
 
 
 namespace Sitecore.Fakes
@@ -55,6 +56,26 @@ namespace Sitecore.Fakes
             : this(fieldList, itemid, ID.NewID, itemName,databaseName)
         {
         }
+        public FakeItem(FieldList fieldList, ID itemid, ID templateId, Language language, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName )
+          : base(
+             itemid,
+              new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
+                           language, new Data.Version(1), fieldList),
+              new FakeDatabase(databaseName))
+        {
+
+        }
+
+        public FakeItem( ID itemid, ID templateId, Language language, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName )
+        : base(
+           itemid,
+            new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
+                         language, new Data.Version(1), new FieldList()),
+            new FakeDatabase(databaseName))
+        {
+
+        }
+
 
         public FakeItem(FieldList fieldList, ID itemid, ID templateId, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName)
             : base(

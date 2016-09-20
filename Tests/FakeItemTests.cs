@@ -6,6 +6,7 @@ using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Data.Managers;
+using Sitecore.Globalization;
 using Xunit;
 using Xunit.Extensions;
 
@@ -112,8 +113,31 @@ namespace Sitecore.Fakes.Tests
         }
 
 
+        [Theory, AutoData]
+        public void FakeItem_CreateItemWithLanguagNoFieldList_ShouldGiveValidItem(ID itemId, ID templateID)
+        {
+            var language = Language.Parse("en-Us");
+            var parent = new FakeItem(itemId, templateID, language);
 
-        
-  
+            var sut = (Item)parent;
+
+            sut.Language.Equals(language);
+        }
+
+
+        [Theory, AutoData]
+        public void FakeItem_CreateItemWithLanguagFieldList_ShouldGiveValidItem(ID itemId, ID templateID)
+        {
+            var language = Language.Parse("en-Us");
+            var parent = new FakeItem(new FieldList(),itemId, templateID, language);
+
+            var sut = (Item)parent;
+
+            sut.Language.Equals(language);
+        }
+
+
+
+
     }
 }

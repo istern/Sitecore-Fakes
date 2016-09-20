@@ -59,17 +59,6 @@ namespace Sitecore.Fakes
 
        
 
-        public virtual Item FakeGetItem(ID itemid)
-        {
-            return _items.FirstOrDefault(i => i.ID == itemid);
-        }
-
-       
- 
-
- 
-
-
         public Item RootItem {
             get
             {
@@ -115,12 +104,12 @@ namespace Sitecore.Fakes
 
         public override Item GetItem(ID itemId)
         {
-            throw new NotImplementedException();
+            return _items.FirstOrDefault(i => i.ID == itemId);
         }
 
         public override Item GetItem(ID itemId, Language language)
         {
-            throw new NotImplementedException();
+            return _items.FirstOrDefault(i => i.ID == itemId && i.Language == language);
         }
 
         public override Item GetItem(ID itemId, Language language, Version version)
@@ -155,7 +144,7 @@ namespace Sitecore.Fakes
 
         public override Item GetRootItem()
         {
-            throw new NotImplementedException();
+            return RootItem;
         }
 
         public override Item GetRootItem(Language language)
