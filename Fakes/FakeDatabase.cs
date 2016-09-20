@@ -159,7 +159,7 @@ namespace Sitecore.Fakes
 
         public override TemplateItem GetTemplate(ID templateId)
         {
-            throw new NotImplementedException();
+            return (TemplateItem) _items.FirstOrDefault(i => i.ID == templateId);
         }
 
         public override TemplateItem GetTemplate(string fullName)

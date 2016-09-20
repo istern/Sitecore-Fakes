@@ -84,8 +84,15 @@ namespace Sitecore.Fakes
                              Globalization.Language.Invariant, new Data.Version(1), fieldList),
                 new FakeDatabase(databaseName))
         {         
-         
+      
         }
 
+        public override Item Add(string name, TemplateID templateID)
+        {
+            var db = (FakeDatabase)this.Database;
+            var newItem = new FakeItem(ID.NewID, templateID, name);
+            db.FakeAddItem(newItem);
+            return newItem;
+        }
     }
 }

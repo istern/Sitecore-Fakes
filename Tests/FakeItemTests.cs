@@ -137,6 +137,19 @@ namespace Sitecore.Fakes.Tests
         }
 
 
+        [Theory, AutoData]
+        public void FakeItem_AddChildItem_ShouldGiveValidItem( TemplateID templateID)
+        {
+      
+            var parent = new FakeItem();
+            var childName = "childName";
+
+           var child = parent.Add(childName, templateID);
+
+            parent.Database.GetItem(child.ID).Should().NotBeNull();
+        }
+
+
 
 
     }
