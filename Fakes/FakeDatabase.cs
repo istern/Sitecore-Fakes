@@ -152,6 +152,7 @@ namespace Sitecore.Fakes
             throw new NotImplementedException();
         }
 
+        [Obsolete]
         public override IndexSearcher GetSearcher(string name)
         {
             throw new NotImplementedException();
@@ -187,33 +188,34 @@ namespace Sitecore.Fakes
             throw new NotImplementedException();
         }
 
-        public override AliasResolver Aliases { get; }
-        public override List<string> ArchiveNames { get; }
-        public override DataArchives Archives { get; }
-        public override DatabaseCaches Caches { get; }
+        public override AliasResolver Aliases{ get { return null; }}
+        public override List<string> ArchiveNames{ get { return null; }}
+        public override DataArchives Archives{ get { return null; }}
+        public override DatabaseCaches Caches{ get { return null; }}
         public override string ConnectionStringName { get; set; }
-        public override DataManager DataManager { get; }
-        public override DatabaseEngines Engines { get; }
-        public override bool HasContentItem { get; }
+        public override DataManager DataManager{ get { return null; }}
+        public override DatabaseEngines Engines{ get { return null; }}
+        public override bool HasContentItem{ get { return false; }}
         public override string Icon { get; set; }
-        public override ItemRecords Items { get; }
-        public override Language[] Languages { get; }
-        public override BranchRecords Branches { get; }
-        public override BranchRecords Masters { get; }
-        public override string Name { get; }
-        public override DatabaseProperties Properties { get; }
+        public override ItemRecords Items{ get { return null; }}
+        public override Language[] Languages{ get { return null; }}
+        public override BranchRecords Branches{ get { return null; }}
+        [Obsolete]
+        public override BranchRecords Masters{ get { return null; }}
+        public override string Name{ get { return null; }}
+        public override DatabaseProperties Properties{ get { return null; }}
         public override bool Protected { get; set; }
         public override bool ProxiesEnabled { get; set; }
         public override ProxyDataProvider ProxyDataProvider { get; set; }
         public override bool PublishVirtualItems { get; set; }
         public override bool ReadOnly { get; set; }
-        public override DatabaseRemoteEvents RemoteEvents { get; }
-        public override ResourceItems Resources { get; }
+        public override DatabaseRemoteEvents RemoteEvents{ get { return null; }}
+        public override ResourceItems Resources{ get { return null; }}
         public override bool SecurityEnabled { get; set; }
-        public override Item SitecoreItem { get; }
-        public override TemplateRecords Templates { get; }
+        public override Item SitecoreItem{ get { return null; }}
+        public override TemplateRecords Templates{ get { return null; }}
         public override IWorkflowProvider WorkflowProvider { get; set; }
         public override NotificationProvider NotificationProvider { get; set; }
-        protected override DataProviderCollection DataProviders { get; }
+        protected override DataProviderCollection DataProviders { get { return null; } }
     }
 }
