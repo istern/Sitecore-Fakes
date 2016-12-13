@@ -1,3 +1,5 @@
+https://ci.appveyor.com/api/projects/status/github/istern/sitecore-fakes?branch=master&svg=true
+
 Sitecore-Fakes
 ==============
 
