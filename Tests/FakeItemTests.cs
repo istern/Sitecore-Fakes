@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit;
+using Sitecore.Collections;
 using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -163,7 +165,21 @@ namespace Sitecore.Fakes.Tests
         //   var str = child.Paths.FullPath;
         }
 
+        [Theory, AutoData]
+        public void GetChildren_ForItemsWithNotChildren_ChildListShouldBeEmpty(TemplateID templateID)
+        {
 
+            var parent = new FakeItem("demo");
+            parent.Add("test", new TemplateID(ID.NewID));
+            var child = parent.Children;
+
+
+           var children = parent.GetChildren();
+
+           children.FirstOrDefault().Name.ShouldBeEquivalentTo("test");
+            children.FirstOrDefault().Parent.ID.ShouldBeEquivalentTo(parent.ID);
+            //   var str = child.Paths.FullPath;
+        }
 
 
     }

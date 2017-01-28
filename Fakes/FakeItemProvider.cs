@@ -1,4 +1,5 @@
-﻿using Sitecore.Collections;
+﻿using System.Linq;
+using Sitecore.Collections;
 using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -10,12 +11,21 @@ namespace Sitecore.Fakes
 {
     public class FakeItemProvider : ItemProvider
     {
-        public override ChildList GetChildren(Item item, SecurityCheck securityCheck)
+        public override ChildList GetChildren(Item item, SecurityCheck securityCheck, ChildListOptions options)
         {
-            return null;
+            FakeDatabase db = new FakeDatabase(item.Database.Name);
+            System.Collections.ICollection children = db.FakeGetChildren(item).ToArray();
+            return new ChildList(item, children);
         }
 
-       public override Item GetParent(Item item, SecurityCheck securityCheck)
+        public override ChildList GetChildren(Item item, SecurityCheck securityCheck)
+        {
+            FakeDatabase db = new FakeDatabase(item.Database.Name);
+            System.Collections.ICollection children = db.FakeGetChildren(item).ToArray();
+            return new ChildList(item,children);
+        }
+
+        public override Item GetParent(Item item, SecurityCheck securityCheck)
        {
            return null;
        }

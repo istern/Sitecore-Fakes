@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sitecore.Collections;
 using Sitecore.Configuration;
 using Sitecore.Data;
@@ -34,12 +35,12 @@ namespace Sitecore.Fakes
         {
         }
 
-      
+
 
         public FakeItem(ID itemId, ID templateID, string itemName, string dabaseName = DefaultDatabaseName)
             : this(new FieldList(), itemId, templateID, itemName, dabaseName)
         {
-           
+
         }
 
         public FakeItem(ID itemId, ID templateID, string itemName = DefaultitemName)
@@ -53,10 +54,10 @@ namespace Sitecore.Fakes
         }
 
         public FakeItem(FieldList fieldList, ID itemid, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName)
-            : this(fieldList, itemid, ID.NewID, itemName,databaseName)
+            : this(fieldList, itemid, ID.NewID, itemName, databaseName)
         {
         }
-        public FakeItem(FieldList fieldList, ID itemid, ID templateId, Language language, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName )
+        public FakeItem(FieldList fieldList, ID itemid, ID templateId, Language language, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName)
           : base(
              itemid,
               new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
@@ -66,14 +67,15 @@ namespace Sitecore.Fakes
 
         }
 
-        public FakeItem( ID itemid, ID templateId, Language language, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName )
+        public FakeItem(ID itemid, ID templateId, Language language, string itemName = DefaultitemName, string databaseName = DefaultDatabaseName)
         : base(
            itemid,
             new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
                          language, new Data.Version(1), new FieldList()),
             new FakeDatabase(databaseName))
         {
-
+            FakeDatabase db = (FakeDatabase)this.Database;
+            db.FakeAddItem(this);
         }
 
 
@@ -83,15 +85,38 @@ namespace Sitecore.Fakes
                 new ItemData(new ItemDefinition(ID.NewID, itemName, templateId, ID.NewID),
                              Globalization.Language.Invariant, new Data.Version(1), fieldList),
                 new FakeDatabase(databaseName))
-        {         
-      
+        {
+            FakeDatabase db = (FakeDatabase)this.Database;
+            db.FakeAddItem(this);
         }
 
+        private FakeDatabase _fakeDatabase;
+        public FakeDatabase GetFakeDatabase(string name = "web")
+        {
+
+            if (_fakeDatabase == null)
+            {
+                if (this.Database != null)
+                    _fakeDatabase = (FakeDatabase)this.Database;
+                if (_fakeDatabase == null)
+                    _fakeDatabase = new FakeDatabase(name);
+            }
+            return _fakeDatabase;
+        }
+
+        public Item FakeParent;
+        public override Item Parent
+        {
+            get { return FakeParent; }
+        }
+
+        public static List<Item> FakeChildren = new List<Item>();
         public override Item Add(string name, TemplateID templateID)
         {
-            var db = (FakeDatabase)this.Database;
-            var newItem = new FakeItem(ID.NewID, templateID, name);
-            db.FakeAddItem(newItem);
+            var newItem = new FakeItem(ID.NewID, templateID, name, dabaseName: this.Database.Name);
+           FakeDatabase db = (FakeDatabase) this.Database;
+                db.FakeAddChildItem(this, newItem);
+            newItem.FakeParent = this;
             return newItem;
         }
     }

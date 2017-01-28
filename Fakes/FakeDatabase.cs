@@ -20,22 +20,46 @@ namespace Sitecore.Fakes
 {
     public class FakeDatabase : Database
     {
-        private readonly ConcurrentBag<Item> _items;
-        private readonly ConcurrentBag<Tuple<Item, IEnumerable<Item>>> _templates;
+        private static  ConcurrentBag<Item> _items = new ConcurrentBag<Item>();
+        private static  ConcurrentBag<Tuple<Item, List<Item>>> _childMappings = new ConcurrentBag<Tuple<Item, List<Item>>>();
+        private static  ConcurrentBag<Tuple<Item, IEnumerable<Item>>> _templates = new ConcurrentBag<Tuple<Item, IEnumerable<Item>>>();
         private Item _rootItem;
+        private readonly string _name;
 
-        public FakeDatabase(string name)
-         {
-            _items = new ConcurrentBag<Item>();
-            _templates = new ConcurrentBag<Tuple<Item, IEnumerable<Item>>>();
+      
+        public FakeDatabase(string name = "web")
+        {
+            _name = name;
+          //  _items = 
+           // _templates 
           
         }
 
         public virtual void FakeAddItem(Item item)
         {
             _items.Add(item);
+            Tuple<Item, List<Item>> childMapping =
+                    new Tuple<Item, List<Item>>(item, new List<Item>());
+            _childMappings.Add(childMapping);
         }
-        public virtual void FakeAddTemplate(Item item, IEnumerable<Item> baseTemplates)
+
+
+        public virtual void FakeAddChildItem(Item parent,Item item)
+        {
+           var children = _childMappings.FirstOrDefault(x => x.Item1.ID == parent.ID);
+            if(children != null)
+            children.Item2.Add(item);
+        }
+
+        public virtual IEnumerable<Item> FakeGetChildren(Item parent)
+        {
+          return _childMappings.FirstOrDefault(x => x.Item1.ID == parent.ID)?.Item2;
+
+        }
+
+
+
+        public virtual void FakeAddTemplate(Item item, List<Item> baseTemplates)
         {
 
             if (_templates.Count(tuple => tuple.Item1.ID == ID.Parse("{ab86861a-6030-46c5-b394-e8f99e8b87db}")) == 1)
