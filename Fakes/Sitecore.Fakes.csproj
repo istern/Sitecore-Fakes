@@ -90,7 +90,9 @@
     <Compile Include="ConfigurationFakes\FakeAutheorizationProvider.cs" />
     <Compile Include="ConfigurationFakes\FakeDomainProvider.cs" />
     <Compile Include="FakeDatabase.cs" />
+    <Compile Include="FakeDataProvider.cs" />
     <Compile Include="FakeItemProvider.cs" />
+    <Compile Include="FakeLanguageFactory.cs" />
     <Compile Include="FakeTemplateProvider.cs" />
     <Compile Include="Fields\FakeField.cs" />
     <Compile Include="FakeItem.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Fields\FakeInternalLinkField.cs" />
     <Compile Include="Fields\FakeLinkField.cs" />
     <Compile Include="Fields\MediaStandardFields.cs" />
+    <Compile Include="GetFakeFieldValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

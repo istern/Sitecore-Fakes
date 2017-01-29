@@ -18,20 +18,13 @@ namespace Sitecore.Fakes
         {
             return FakeRootItem.ID;
         }
+
+
     }
 
-    public class FakeDb
-    {
+  
 
-        public FakeDb(string databaseName)
-        {
      
-        }
 
-        internal void AddDataProvider(DataProvider provider)
-        {
-          
-        }
-
-    }
+    
 }

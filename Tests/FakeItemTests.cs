@@ -118,7 +118,8 @@ namespace Sitecore.Fakes.Tests
         [Theory, AutoData]
         public void FakeItem_CreateItemWithLanguagNoFieldList_ShouldGiveValidItem(ID itemId, ID templateID)
         {
-            var language = Language.Parse("en-Us");
+
+            var language = FakeLanguageFactory.Create("en-US");
             var parent = new FakeItem(itemId, templateID, language);
 
             var sut = (Item)parent;
@@ -130,12 +131,14 @@ namespace Sitecore.Fakes.Tests
         [Theory, AutoData]
         public void FakeItem_CreateItemWithLanguagFieldList_ShouldGiveValidItem(ID itemId, ID templateID)
         {
-            var language = Language.Parse("en-Us");
+
+            var language = FakeLanguageFactory.Create("en-US");
             var parent = new FakeItem(new FieldList(),itemId, templateID, language);
 
             var sut = (Item)parent;
 
             sut.Language.Equals(language);
+            
         }
 
 

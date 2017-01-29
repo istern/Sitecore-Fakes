@@ -26,7 +26,10 @@ namespace Sitecore.Fakes
         private Item _rootItem;
         private readonly string _name;
 
-      
+        internal void AddDataProvider(DataProvider provider)
+        {
+
+        }
         public FakeDatabase(string name = "web")
         {
             _name = name;
@@ -163,7 +166,7 @@ namespace Sitecore.Fakes
 
         public override LanguageCollection GetLanguages()
         {
-            throw new NotImplementedException();
+            return new LanguageCollection();
         }
 
         public override Item GetRootItem()
@@ -240,6 +243,6 @@ namespace Sitecore.Fakes
         public override TemplateRecords Templates{ get { return null; }}
         public override IWorkflowProvider WorkflowProvider { get; set; }
         public override NotificationProvider NotificationProvider { get; set; }
-        protected override DataProviderCollection DataProviders { get { return null; } }
+        protected override DataProviderCollection DataProviders { get {return  new DataProviderCollection(); } }
     }
 }

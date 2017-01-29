@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Xunit;
@@ -20,6 +21,8 @@ namespace Sitecore.Fakes.Tests
             var item = fakeItem;
             
             demo.GetField(item).ShouldAllBeEquivalentTo(fieldValue);
+           Database db = Factory.GetDatabase("master");
+           
         }
     }
 

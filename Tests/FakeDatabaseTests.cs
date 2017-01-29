@@ -24,7 +24,7 @@ namespace Sitecore.Fakes.Tests
         public void DatabaseGetItemFromIdAndLanguage_DatabaseShouldReturnItem()
         {
             FakeDatabase database = new FakeDatabase("web");
-            var language = Language.Parse("en-Us");
+            var language = FakeLanguageFactory.Create("en-US");
             var itemId = ID.NewID;
             var templateId = ID.NewID;
             var fakeItem = new FakeItem(itemId, templateId,language) ;
@@ -39,11 +39,11 @@ namespace Sitecore.Fakes.Tests
         public void DatabaseGetItemFromIdAndOitherLanguage_DatabaseShouldReturnNoItem()
         {
             FakeDatabase database = new FakeDatabase("web");
-            var language = Language.Parse("en-Us");
+            var language = FakeLanguageFactory.Create("en-US");
             var itemId = ID.NewID;
             var templateId = ID.NewID;
             var fakeItem = new FakeItem(itemId, templateId, language);
-            var otherLanguage = Language.Parse("en-Gb");
+            var otherLanguage = FakeLanguageFactory.Create("en-Gb");
             database.FakeAddItem(fakeItem);
 
 
