@@ -155,33 +155,18 @@ namespace Sitecore.Fakes.Tests
         }
 
 
-       [ Theory, AutoData]
-        public void GetItemPath_FullPath_ShouldContainFullPathToItem(TemplateID templateID)
-        {
-
-            var parent = new FakeItem();
-            var childName = "childName";
-
-            var child = parent.Add(childName, templateID);
-
-            
-        //   var str = child.Paths.FullPath;
-        }
-
         [Theory, AutoData]
         public void GetChildren_ForItemsWithNotChildren_ChildListShouldBeEmpty(TemplateID templateID)
         {
 
             FakeItem parent = new FakeItem("demo");
             parent.Add("test", new TemplateID(ID.NewID));
-            var child =  parent.Children;
 
-
-           var children = parent.Children;
+           var children = parent.GetChildren().Where(x=>x.Parent.ID == parent.ID);
 
            children.FirstOrDefault().Name.ShouldBeEquivalentTo("test");
             children.FirstOrDefault().Parent.ID.ShouldBeEquivalentTo(parent.ID);
-            //   var str = child.Paths.FullPath;
+           
         }
 
 
