@@ -177,7 +177,7 @@ namespace Sitecore.Fakes.Tests
             var child =  parent.Children;
 
 
-           var children = parent.GetChildren();
+           var children = parent.Children;
 
            children.FirstOrDefault().Name.ShouldBeEquivalentTo("test");
             children.FirstOrDefault().Parent.ID.ShouldBeEquivalentTo(parent.ID);
