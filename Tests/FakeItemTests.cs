@@ -172,9 +172,9 @@ namespace Sitecore.Fakes.Tests
         public void GetChildren_ForItemsWithNotChildren_ChildListShouldBeEmpty(TemplateID templateID)
         {
 
-            var parent = new FakeItem("demo");
+            FakeItem parent = new FakeItem("demo");
             parent.Add("test", new TemplateID(ID.NewID));
-            var child = parent.Children;
+            var child =  parent.Children;
 
 
            var children = parent.GetChildren();

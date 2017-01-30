@@ -110,12 +110,34 @@ namespace Sitecore.Fakes
             get { return FakeParent; }
         }
 
+        public override ChildList GetChildren()
+        {
+            return GetChildren(ChildListOptions.None);
+        }
+
+
+        public override ChildList GetChildren(ChildListOptions options)
+        {
+
+            return new ChildList(this, FakeChildren);
+        }
+
+        public virtual ChildList Children
+        {
+            get
+            {
+                return new ChildList(this, FakeChildren);
+            }
+        }
+
+
         public static List<Item> FakeChildren = new List<Item>();
         public override Item Add(string name, TemplateID templateID)
         {
             var newItem = new FakeItem(ID.NewID, templateID, name, dabaseName: this.Database.Name);
            FakeDatabase db = (FakeDatabase) this.Database;
-                db.FakeAddChildItem(this, newItem);
+            FakeChildren.Add(newItem);
+            db.FakeAddChildItem(this, newItem);
             newItem.FakeParent = this;
             return newItem;
         }
