@@ -56,8 +56,10 @@ namespace Sitecore.Fakes
 
         public virtual IEnumerable<Item> FakeGetChildren(Item parent)
         {
-          return _childMappings.FirstOrDefault(x => x.Item1.ID == parent.ID)?.Item2;
-
+            var mapping = _childMappings.FirstOrDefault(x => x.Item1.ID == parent.ID);
+            if(mapping == null)
+                return new List<Item>();
+             return mapping.Item2;
         }
 
 
@@ -243,6 +245,6 @@ namespace Sitecore.Fakes
         public override TemplateRecords Templates{ get { return null; }}
         public override IWorkflowProvider WorkflowProvider { get; set; }
         public override NotificationProvider NotificationProvider { get; set; }
-        protected override DataProviderCollection DataProviders { get {return  new DataProviderCollection(); } }
+        protected override DataProviderCollection DataProviders => new DataProviderCollection();
     }
 }
